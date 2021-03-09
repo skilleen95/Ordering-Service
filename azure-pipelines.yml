@@ -20,3 +20,31 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
+- task: oc-cmd@2
+  inputs:
+    connectionType: 'OpenShift Connection Service'
+    openshiftService: 'My OpenShift Connection'
+    version: '4.2'
+    cmd: 'oc project scilleen-code'
+
+- task: oc-cmd@2
+  inputs:
+    connectionType: 'OpenShift Connection Service'
+    openshiftService: 'My OpenShift Connection'
+    version: '4.2'
+    cmd: 'oc get pods'
+  
+- task: oc-cmd@2
+  inputs:
+    connectionType: 'OpenShift Connection Service'
+    openshiftService: 'My OpenShift Connection'
+    version: '4.2'
+    cmd: 'oc status'
+
+- task: oc-cmd@2
+  inputs:
+    connectionType: 'OpenShift Connection Service'
+    openshiftService: 'My OpenShift Connection'
+    version: '4.2'
+    cmd: 'oc start-build ordering-service --follow'
