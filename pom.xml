@@ -96,5 +96,16 @@
 		</repository>
 	</repositories>
 
+	<pluginRepositories>
+	<pluginRepository>
+		<id>redhat-ga-repository</id>
+		<url>https://maven.repository.redhat.com/ga</url>
+		<releases />
+		<snapshots>
+			<enabled>false</enabled>
+		</snapshots>
+	</pluginRepository>
+	</pluginRepositories>
+
 
 </project>
