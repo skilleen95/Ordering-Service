@@ -1,5 +1,6 @@
 package com.skilleen.firstmicroservice.services;
 
+import com.skilleen.firstmicroservice.dto.ShippingOrder;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.http.HttpEntity;

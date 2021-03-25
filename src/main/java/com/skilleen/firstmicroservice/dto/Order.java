@@ -1,4 +1,4 @@
-package com.skilleen.firstmicroservice.services;
+package com.skilleen.firstmicroservice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

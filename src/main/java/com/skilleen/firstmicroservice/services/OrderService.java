@@ -1,5 +1,6 @@
 package com.skilleen.firstmicroservice.services;
 
+import com.skilleen.firstmicroservice.dto.Order;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
