@@ -8,7 +8,7 @@ class FirstMicroserviceApplicationTests {
 
 	@Test
 	void contextLoads() {
-		assertThat(true).isTrue();
+		assertThat(false).isTrue();
 	}
 
 }
