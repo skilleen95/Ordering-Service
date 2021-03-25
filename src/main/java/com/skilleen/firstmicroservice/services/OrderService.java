@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class OrderService {
 
-    private List<Order> list = new ArrayList<>();
+    private final List<Order> list = new ArrayList<>();
 
     @PostConstruct
     public void initDB() {
@@ -19,9 +19,8 @@ public class OrderService {
         list.add(new Order(70, "Shoes", 130));
     }
 
-    public Order addOrder(Order order) {
+    public void addOrder(Order order) {
         list.add(order);
-        return order;
     }
 
     public List<Order> getOrders() {
