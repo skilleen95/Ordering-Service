@@ -5,10 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FirstMicroserviceApplication  {
+public class OrderingServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FirstMicroserviceApplication.class, args);
+		SpringApplication.run(OrderingServiceApplication.class, args);
 	}
 
 }
