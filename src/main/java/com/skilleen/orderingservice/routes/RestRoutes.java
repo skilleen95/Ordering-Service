@@ -1,9 +1,9 @@
-package com.skilleen.firstmicroservice.routes;
+package com.skilleen.orderingservice.routes;
 
-import com.skilleen.firstmicroservice.dto.Order;
-import com.skilleen.firstmicroservice.services.OrderProcessor;
-import com.skilleen.firstmicroservice.services.OrderService;
-import com.skilleen.firstmicroservice.dto.ShippingOrder;
+import com.skilleen.orderingservice.dto.Order;
+import com.skilleen.orderingservice.services.OrderProcessor;
+import com.skilleen.orderingservice.services.OrderService;
+import com.skilleen.orderingservice.dto.ShippingOrder;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;

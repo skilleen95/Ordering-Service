@@ -1,4 +1,4 @@
-package com.skilleen.firstmicroservice.dto;
+package com.skilleen.orderingservice.dto;
 
 import lombok.Data;
 

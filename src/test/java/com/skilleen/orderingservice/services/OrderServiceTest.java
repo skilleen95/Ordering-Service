@@ -1,6 +1,6 @@
-package com.skilleen.firstmicroservice.services;
+package com.skilleen.orderingservice.services;
 
-import com.skilleen.firstmicroservice.dto.Order;
+import com.skilleen.orderingservice.dto.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

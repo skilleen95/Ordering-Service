@@ -1,4 +1,4 @@
-package com.skilleen.firstmicroservice;
+package com.skilleen.orderingservice;
 
 
 import org.springframework.boot.SpringApplication;
