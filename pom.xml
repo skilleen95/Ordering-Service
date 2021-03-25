@@ -5,14 +5,14 @@
 	<groupId>com.skilleen</groupId>
 	<artifactId>ordering-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>first-microservice</name>
+	<name>ordering-service</name>
 	<description>OpenShift Demo</description>
 
 	<properties>
 		<fuse.bom.version>7.8.0.fuse-sb2-780038-redhat-00001</fuse.bom.version>
 		<java.version>1.8</java.version>
 		<sonar.exclusions>
-			**/FirstMicroserviceApplication.java,
+			**/OrderingServiceApplication.java,
 			**/dto/**/*
 		</sonar.exclusions>
 	</properties>
