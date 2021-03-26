@@ -11,6 +11,7 @@ import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 @Component
 public class RestRoutes extends RouteBuilder {
@@ -39,8 +40,16 @@ public class RestRoutes extends RouteBuilder {
         from("direct:order")
                 .log("Incoming Body is ${body}")
                 .bean(this,"transformMessage")
-                .process(new OrderProcessor())
+                .process(new OrderProcessor(new RestTemplate()))
                 .log("Outgoing Body is ${body}");
 
     }
+
+    public void transformMessage(Exchange exchange){
+        Message in = exchange.getIn();
+        Order order = in.getBody(Order.class);
+        ShippingOrder shippingOrder = new ShippingOrder(order.getName(), order.getPrice());
+        in.setBody(shippingOrder);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.skilleen.orderingservice.services;
 
 import com.skilleen.orderingservice.dto.ShippingOrder;
+import lombok.AllArgsConstructor;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.http.HttpEntity;
@@ -9,7 +10,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
+@AllArgsConstructor
 public class OrderProcessor implements Processor {
+
+    RestTemplate restTemplate;
 
     private final String shippingUrl = System.getenv("shipping-service-dev-url");
 
@@ -19,8 +23,7 @@ public class OrderProcessor implements Processor {
         exchange.getOut().setBody(updateShippingServiceWithOrder(order));
     }
 
-    public String updateShippingServiceWithOrder(ShippingOrder order) {
-        RestTemplate restTemplate = new RestTemplate();
+    private String updateShippingServiceWithOrder(ShippingOrder order) {
         HttpEntity<ShippingOrder> httpEntity = new HttpEntity<>(order);
         if (shippingUrl != null) {
             String shipOrderUrl = shippingUrl + "/ship-order";
