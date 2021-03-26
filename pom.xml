@@ -13,7 +13,8 @@
 		<java.version>1.8</java.version>
 		<sonar.exclusions>
 			**/OrderingServiceApplication.java,
-			**/dto/**/*
+			**/dto/**/*,
+			**/test/**/*
 		</sonar.exclusions>
 	</properties>
 
