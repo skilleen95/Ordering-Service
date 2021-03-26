@@ -26,8 +26,7 @@ public class OrderProcessor implements Processor {
     private String updateShippingServiceWithOrder(ShippingOrder order) {
         HttpEntity<ShippingOrder> httpEntity = new HttpEntity<>(order);
         if (shippingUrl != null) {
-            String shipOrderUrl = shippingUrl + "/ship-order";
-            ResponseEntity<String> response = restTemplate.postForEntity(shipOrderUrl, httpEntity, String.class);
+            ResponseEntity<String> response = restTemplate.postForEntity(shippingUrl + "/ship-order", httpEntity, String.class);
             return response.getBody();
         }
         else {
