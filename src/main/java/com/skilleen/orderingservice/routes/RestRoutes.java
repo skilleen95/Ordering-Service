@@ -43,11 +43,4 @@ public class RestRoutes extends RouteBuilder {
                 .log("Outgoing Body is ${body}");
 
     }
-
-    public void transformMessage(Exchange exchange){
-        Message in = exchange.getIn();
-        Order order = in.getBody(Order.class);
-        ShippingOrder shippingOrder = new ShippingOrder(order.getName(), order.getPrice());
-        in.setBody(shippingOrder);
-    }
 }
