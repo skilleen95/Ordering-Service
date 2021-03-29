@@ -28,7 +28,4 @@ public class OrderService {
         return list;
     }
 
-    private void updateOrders() {
-
-    }
 }

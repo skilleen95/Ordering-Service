@@ -12,7 +12,7 @@ class OrderServiceTest {
 
     OrderService orderService = new OrderService();
 
-   /* @BeforeEach
+    @BeforeEach
     private void setup() {
         orderService.initDB();
     }
@@ -31,7 +31,7 @@ class OrderServiceTest {
         orderService.addOrder(order);
 
         assertThat(orderService.getOrders()).contains(order);
-    }*/
+    }
 
 
 }
