@@ -11,7 +11,7 @@ import java.util.List;
 public class OrderService {
 
     private final List<Order> list = new ArrayList<>();
-
+    //test comment
     @PostConstruct
     public void initDB() {
         list.add(new Order(67, "Phone", 2000));
