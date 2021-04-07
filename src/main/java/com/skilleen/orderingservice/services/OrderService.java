@@ -25,6 +25,7 @@ public class OrderService {
     }
 
     public List<Order> getOrders() {
+        System.out.println("Returning the following orders: "+ list);
         return list;
     }
 
