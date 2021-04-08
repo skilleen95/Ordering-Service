@@ -38,10 +38,8 @@ public class RestRoutes extends RouteBuilder {
                 .to("direct:order");
 
         from("direct:order")
-                .log("Incoming Body is ${body}")
                 .bean(this,"transformMessage")
-                .process(new OrderProcessor(new RestTemplate()))
-                .log("Outgoing Body is ${body}");
+                .process(new OrderProcessor(new RestTemplate()));
 
     }
 

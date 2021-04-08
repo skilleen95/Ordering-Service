@@ -33,6 +33,7 @@ public class OrderProcessor implements Processor {
             return response.getBody();
         }
         else {
+            System.err.println("Invalid Shipping URL");
             return "Invalid Shipping URL";
         }
     }
