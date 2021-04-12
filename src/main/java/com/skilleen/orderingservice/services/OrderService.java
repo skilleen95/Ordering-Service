@@ -1,6 +1,8 @@
 package com.skilleen.orderingservice.services;
 
 import com.skilleen.orderingservice.dto.Order;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -11,6 +13,7 @@ import java.util.List;
 public class OrderService {
 
     private final List<Order> list = new ArrayList<>();
+    private static final Logger logger = LogManager.getLogger(OrderService.class);
 
     @PostConstruct
     public void initDB() {
@@ -26,6 +29,7 @@ public class OrderService {
 
     public List<Order> getOrders() {
         System.out.println("Returning the following orders: "+ list);
+        logger.info("Returning the following orders: "+ list);
         return list;
     }
 

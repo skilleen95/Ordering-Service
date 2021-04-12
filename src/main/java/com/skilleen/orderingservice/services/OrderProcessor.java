@@ -4,6 +4,8 @@ import com.skilleen.orderingservice.dto.ShippingOrder;
 import lombok.AllArgsConstructor;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -15,7 +17,8 @@ public class OrderProcessor implements Processor {
 
     RestTemplate restTemplate;
 
-    private final String shippingUrl = System.getenv("shipping-service-dev-url");
+    private final String shippingUrl = System.getenv("shipping-service-dev-urlss");
+    private static final Logger logger = LogManager.getLogger(OrderProcessor.class);
 
     @Override
     public void process(Exchange exchange) {
@@ -33,6 +36,7 @@ public class OrderProcessor implements Processor {
             return response.getBody();
         }
         else {
+            logger.error("Invalid Shipping URL");
             System.err.println("Invalid Shipping URL");
             return "Invalid Shipping URL";
         }
