@@ -17,7 +17,7 @@ public class OrderProcessor implements Processor {
 
     RestTemplate restTemplate;
 
-    private final String shippingUrl = System.getenv("shipping-service-dev-urlss");
+    private final String shippingUrl = System.getenv("shipping-service-dev-url");
     private static final Logger logger = LogManager.getLogger(OrderProcessor.class);
 
     @Override
@@ -29,15 +29,14 @@ public class OrderProcessor implements Processor {
     private String updateShippingServiceWithOrder(ShippingOrder order) {
         HttpEntity<ShippingOrder> httpEntity = new HttpEntity<>(order);
         if (shippingUrl != null) {
-            System.out.println("Sending Order to Shipping Service");
+            logger.info("Sending Order to Shipping Service");
             ResponseEntity<String> response = restTemplate.postForEntity(shippingUrl + "/ship-order", httpEntity, String.class);
-            System.out.println("DONE");
-            System.out.println(response.getBody());
+            logger.info("DONE");
+            logger.info(response.getBody());
             return response.getBody();
         }
         else {
             logger.error("Invalid Shipping URL");
-            System.err.println("Invalid Shipping URL");
             return "Invalid Shipping URL";
         }
     }
