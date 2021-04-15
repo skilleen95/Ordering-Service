@@ -13,7 +13,7 @@ public class KafkaRoutes extends RouteBuilder {
                 .setBody(constant("Message from Scott"))          // Message to send
                 .setHeader("KEY", constant("hello")) // Key of the message
                 .log("Recieved Message!")
-                .to("kafka:scotts-topic?brokers=my-cluster-kafka-bootstrap:9092");
+                .to("kafka:scotts-topic?brokers=my-cluster-kafka-brokers:9092");
 
 /*        from("kafka:scotts-topic?brokers=localhost:9092")
                 .log("Message received from Kafka : ${body}")
