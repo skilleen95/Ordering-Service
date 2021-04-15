@@ -12,10 +12,8 @@ public class KafkaRoutes extends RouteBuilder {
         from("direct:publish")
                 .setBody(constant("Message from Scott"))          // Message to send
                 .setHeader("KEY", constant("hello")) // Key of the message
-                .log("Recieved Message!")
+                .log("Sending Message!")
                 .to("kafka:scotts-topic?brokers=172.30.74.234:9092");
 
-        from("kafka:scotts-topic?brokers=172.30.74.234:9092")
-                .log("Message received from Kafka : ${body}");
     }
 }
