@@ -37,6 +37,10 @@ public class RestRoutes extends RouteBuilder {
                 .produces(MediaType.APPLICATION_JSON_VALUE)
                 .to("direct:order");
 
+        rest().post("publish-message")
+                .type(String.class)
+                .to("direct:publish");
+
         from("direct:order")
                 .bean(this,"transformMessage")
                 .process(new OrderProcessor(new RestTemplate()));
