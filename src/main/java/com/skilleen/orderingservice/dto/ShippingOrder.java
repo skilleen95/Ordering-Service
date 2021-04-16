@@ -2,10 +2,11 @@ package com.skilleen.orderingservice.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class ShippingOrder {
+public class ShippingOrder implements Serializable {
 
     private String name;
     private double price;
