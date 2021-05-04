@@ -10,12 +10,12 @@ public class ShippingOrder implements Serializable {
 
     private String name;
     private double price;
-    private Date dateShipped;
+    private Date datePlaced;
 
     public ShippingOrder(String name, double price) {
         this.name = name;
         this.price = price;
-        this.dateShipped = new Date();
+        this.datePlaced = new Date();
 
     }
 }
