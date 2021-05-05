@@ -2,6 +2,7 @@ package com.skilleen.orderingservice.routes;
 
 import com.skilleen.orderingservice.dto.Order;
 import com.skilleen.orderingservice.services.OrderService;
+import org.apache.camel.CamelContext;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,12 @@ public class RestRoutes extends RouteBuilder {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private CamelContext camelContext;
+
     @Override
-    public void configure() {
+    public void configure() throws Exception {
+        camelContext.addService(new org.apache.camel.impl.saga.InMemorySagaService());
         restConfiguration().component("servlet").bindingMode(RestBindingMode.json);
 
         rest().get("/hello-world").produces(MediaType.APPLICATION_JSON_VALUE)
