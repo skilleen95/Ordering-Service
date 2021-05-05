@@ -42,7 +42,6 @@ public class RestRoutes extends RouteBuilder {
                 .to("direct:insert-new-order")
                 .to("direct:create-shipping-request");
 
-
        rest().post("publish-message")
                 .type(String.class)
                 .to("direct:publish");

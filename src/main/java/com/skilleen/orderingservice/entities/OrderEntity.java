@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
 
-@Entity(name = "Order")
+@Entity(name = "CustomerOrder")
 @Data
 @Builder
 @AllArgsConstructor
