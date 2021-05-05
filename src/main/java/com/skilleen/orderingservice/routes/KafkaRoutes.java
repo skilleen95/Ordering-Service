@@ -19,6 +19,7 @@ public class KafkaRoutes extends RouteBuilder {
                 .to("kafka:scotts-topic?brokers=172.30.74.234:9092");
 
         from("direct:create-shipping-request")
+                .saga()
                 .id("order-route")
                 .bean(this,"transformMessage")
                 .marshal().json(JsonLibrary.Jackson)
