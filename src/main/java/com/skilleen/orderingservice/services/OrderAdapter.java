@@ -3,7 +3,9 @@ package com.skilleen.orderingservice.services;
 import com.skilleen.orderingservice.dto.Order;
 import com.skilleen.orderingservice.entities.OrderEntity;
 import org.apache.camel.Exchange;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderAdapter {
 
     public void adaptToOrderEntity(Exchange exchange) {
