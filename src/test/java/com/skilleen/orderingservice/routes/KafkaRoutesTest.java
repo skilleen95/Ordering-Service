@@ -39,7 +39,7 @@ public class KafkaRoutesTest {
         Order order = new Order(1, "test", 12);
 
         // EXECUTION
-        camelContext.createProducerTemplate().sendBody("direct:order", order);
+        camelContext.createProducerTemplate().sendBody("direct:create-shipping-request", order);
 
         // OUTPUT
         kafkaEndpoint.expectedMessageCount(1);

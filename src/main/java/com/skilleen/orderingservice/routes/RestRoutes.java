@@ -1,17 +1,12 @@
 package com.skilleen.orderingservice.routes;
 
 import com.skilleen.orderingservice.dto.Order;
-import com.skilleen.orderingservice.services.OrderProcessor;
 import com.skilleen.orderingservice.services.OrderService;
-import com.skilleen.orderingservice.dto.ShippingOrder;
-import org.apache.camel.Exchange;
-import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.rest.RestBindingMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 @Component
 public class RestRoutes extends RouteBuilder {
@@ -35,7 +30,8 @@ public class RestRoutes extends RouteBuilder {
                 .type(Order.class)
                 .consumes(MediaType.APPLICATION_JSON_VALUE)
                 .produces(MediaType.APPLICATION_JSON_VALUE)
-                .to("direct:order");
+                .to("direct:insert-new-order")
+                .to("direct:create-shipping-request");
 
        rest().post("publish-message")
                 .type(String.class)
