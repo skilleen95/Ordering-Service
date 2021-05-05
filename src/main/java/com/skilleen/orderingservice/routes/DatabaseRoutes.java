@@ -17,6 +17,7 @@ public class DatabaseRoutes extends RouteBuilder {
     public void configure() {
         from("direct:insert-new-order")
                 .bean(orderAdapter, "adaptToOrderEntity")
+                .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true");
     }
 }
