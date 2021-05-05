@@ -3,6 +3,7 @@ package com.skilleen.orderingservice.routes;
 import com.skilleen.orderingservice.entities.OrderEntity;
 import com.skilleen.orderingservice.services.OrderAdapter;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.SagaPropagation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,7 @@ public class DatabaseRoutes extends RouteBuilder {
     public void configure() {
         from("direct:insert-new-order")
                 .saga()
+                .propagation(SagaPropagation.MANDATORY)
                 .bean(orderAdapter, "adaptToOrderEntity")
                 .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")

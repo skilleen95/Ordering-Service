@@ -5,6 +5,7 @@ import com.skilleen.orderingservice.dto.ShippingOrder;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.SagaPropagation;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,7 @@ public class KafkaRoutes extends RouteBuilder {
 
         from("direct:create-shipping-request")
                 .saga()
+                .propagation(SagaPropagation.MANDATORY)
                 .id("order-route")
                 .bean(this,"transformMessage")
                 .marshal().json(JsonLibrary.Jackson)
