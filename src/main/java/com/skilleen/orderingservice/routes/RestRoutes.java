@@ -30,8 +30,13 @@ public class RestRoutes extends RouteBuilder {
                 .type(Order.class)
                 .consumes(MediaType.APPLICATION_JSON_VALUE)
                 .produces(MediaType.APPLICATION_JSON_VALUE)
+                .to("direct:add-order");
+
+        from("direct:add-order")
+                .multicast()
                 .to("direct:insert-new-order")
                 .to("direct:create-shipping-request");
+
 
        rest().post("publish-message")
                 .type(String.class)
