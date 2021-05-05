@@ -21,7 +21,7 @@ public class KafkaRoutes extends RouteBuilder {
 
         from("direct:create-shipping-request")
                 .saga()
-                .propagation(SagaPropagation.MANDATORY)
+                .propagation(SagaPropagation.SUPPORTS)
                 .id("order-route")
                 .bean(this,"transformMessage")
                 .marshal().json(JsonLibrary.Jackson)
