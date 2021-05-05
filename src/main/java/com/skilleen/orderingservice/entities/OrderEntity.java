@@ -2,6 +2,7 @@ package com.skilleen.orderingservice.entities;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.sql.Date;
 @Entity(name = "Order")
 @Data
 @Builder
+@NoArgsConstructor
 public class OrderEntity {
 
     @Id
