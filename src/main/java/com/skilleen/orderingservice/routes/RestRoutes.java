@@ -38,8 +38,8 @@ public class RestRoutes extends RouteBuilder {
                 .to("direct:add-order");
 
         from("direct:add-order")
-                .multicast()
                 .saga()
+                .multicast()
                 .to("direct:insert-new-order")
                 .to("direct:create-shipping-request");
 
