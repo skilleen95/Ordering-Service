@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderAdapter {
 
-    private static final Logger logger = LogManager.getLogger(OrderProcessor.class);
+    private static final Logger logger = LogManager.getLogger(OrderAdapter.class);
 
     public void adaptToOrderEntity(Exchange exchange) {
         Order order = exchange.getIn().getBody(Order.class);
