@@ -26,7 +26,7 @@ public class KafkaRoutes extends RouteBuilder {
                 .bean(this,"transformMessage")
                 .marshal().json(JsonLibrary.Jackson)
                 .log("Order confirmed! Sending to Shipping service..")
-                .to("kafka:order-request?brokers=172.30.74.234:9092")
+                .to("kafka:order-request?brokers=172.30.74.235:9092")
                 .id("order-publish")
                 .unmarshal().json(JsonLibrary.Jackson)
                 .log("DONE");
