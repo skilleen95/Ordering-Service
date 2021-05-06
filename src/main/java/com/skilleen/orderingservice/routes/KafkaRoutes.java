@@ -9,6 +9,8 @@ import org.apache.camel.model.SagaPropagation;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.TimeUnit;
+
 @Component
 public class KafkaRoutes extends RouteBuilder {
 
@@ -27,6 +29,7 @@ public class KafkaRoutes extends RouteBuilder {
                 .marshal().json(JsonLibrary.Jackson)
                 .log("Order confirmed! Sending to Shipping service..")
                 .to("kafka:order-request?brokers=172.30.74.235:9092")
+                .timeout(7, TimeUnit.SECONDS)
                 .id("order-publish")
                 .unmarshal().json(JsonLibrary.Jackson)
                 .log("DONE");

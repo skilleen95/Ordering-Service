@@ -29,11 +29,23 @@ public class RestRoutes extends RouteBuilder {
         rest().get("/hello-world").produces(MediaType.APPLICATION_JSON_VALUE)
                 .route().setBody(constant("Hello World From the Order Service!"));
 
+       rest().post("publish-message")
+                .type(String.class)
+                .to("direct:publish");
+
+       getOrdersRoute();
+       addNewOrderRoute();
+
+    }
+
+    private void getOrdersRoute() {
         rest().get("/get-orders")
                 .produces(MediaType.APPLICATION_JSON_VALUE)
                 .route()
                 .setBody(() -> orderService.getOrders());
+    }
 
+    private void addNewOrderRoute() {
         rest().post("add-order")
                 .type(Order.class)
                 .consumes(MediaType.APPLICATION_JSON_VALUE)
@@ -45,10 +57,6 @@ public class RestRoutes extends RouteBuilder {
                 .multicast()
                 .to("direct:insert-new-order")
                 .to("direct:create-shipping-request");
-
-       rest().post("publish-message")
-                .type(String.class)
-                .to("direct:publish");
 
     }
 
