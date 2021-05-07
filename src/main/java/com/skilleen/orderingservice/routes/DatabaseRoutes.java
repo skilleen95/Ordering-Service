@@ -31,7 +31,7 @@ public class DatabaseRoutes extends RouteBuilder {
         from("direct:removeOrder")
                 .transform(header("OptionId")) // retrieve the CreditId option from headers
                 .log("OHNOOOOO")
-                .log(header("OptionId"))
+                .transform(header("OptionId"))
                 //.bean(creditService, "refundCredit")
                 .log("Credit for Custom Id ${body} refunded");
     }
