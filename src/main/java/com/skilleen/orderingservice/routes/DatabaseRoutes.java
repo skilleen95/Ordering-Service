@@ -17,7 +17,6 @@ public class DatabaseRoutes extends RouteBuilder {
     @Override
     public void configure() {
         from("direct:insert-new-order")
-                .transacted()
                 .saga()
                 .propagation(SagaPropagation.SUPPORTS)
                 .bean(orderAdapter, "adaptToOrderEntity")

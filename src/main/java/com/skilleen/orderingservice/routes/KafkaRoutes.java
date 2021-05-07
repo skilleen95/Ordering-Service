@@ -28,6 +28,7 @@ public class KafkaRoutes extends RouteBuilder {
                 .marshal().json(JsonLibrary.Jackson)
                 .log("Order confirmed! Sending to Shipping service..")
                 .to("kafa:order-request?brokers=172.30.74.234:9092")
+                .onException(Exception.class).markRollbackOnlyLast().end()
                 .id("order-publish")
                 .unmarshal().json(JsonLibrary.Jackson)
                 .log("DONE");
