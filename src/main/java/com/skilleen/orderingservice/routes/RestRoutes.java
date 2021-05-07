@@ -46,9 +46,8 @@ public class RestRoutes extends RouteBuilder {
     }
 
     private void addNewOrderRoute() {
-/*        onException().markRollbackOnlyLast()
-        .log("OH NOOO").routeId("add-order2-exception").end();*/
-
+        onException(Exception.class).markRollbackOnlyLast()
+        .log("OH NOOO").routeId("add-order2-exception");
         rest().post("add-order")
                 .id("add-order1")
                 .type(Order.class)
@@ -59,7 +58,7 @@ public class RestRoutes extends RouteBuilder {
         from("direct:add-order")
                 .id("add-order2")
                 .saga()
-                .onException(Exception.class).markRollbackOnlyLast()
+
                 .multicast()
                 .to("direct:insert-new-order")
                 .to("direct:create-shipping-request");
