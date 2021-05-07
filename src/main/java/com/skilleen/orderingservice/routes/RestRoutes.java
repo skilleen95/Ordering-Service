@@ -46,8 +46,8 @@ public class RestRoutes extends RouteBuilder {
     }
 
     private void addNewOrderRoute() {
-        onException().markRollbackOnlyLast()
-        .log("OH NOOO").routeId("add-order2-exception").end();
+/*        onException().markRollbackOnlyLast()
+        .log("OH NOOO").routeId("add-order2-exception").end();*/
 
         rest().post("add-order")
                 .id("add-order1")
