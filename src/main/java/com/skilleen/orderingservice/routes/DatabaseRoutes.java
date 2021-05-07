@@ -7,8 +7,6 @@ import org.apache.camel.model.SagaPropagation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
-
 
 @Component
 public class DatabaseRoutes extends RouteBuilder {
@@ -17,16 +15,24 @@ public class DatabaseRoutes extends RouteBuilder {
     private OrderAdapter orderAdapter;
 
     @Override
-    @Transactional
     public void configure() {
         from("direct:insert-new-order")
                 .id("database")
                 .saga()
                 .propagation(SagaPropagation.SUPPORTS)
+                .option("OptionId", body()) // mark the current body as needed in the compensating action
+                .compensation("direct:removeOrder")
                 .bean(orderAdapter, "adaptToOrderEntity")
                 .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")
                 .log("Database save successful")
                 .end();
+
+        from("direct:removeOrder")
+                .transform(header("OptionId")) // retrieve the CreditId option from headers
+                .log("OHNOOOOO")
+                .log(header("OptionId"))
+                //.bean(creditService, "refundCredit")
+                .log("Credit for Custom Id ${body} refunded");
     }
 }

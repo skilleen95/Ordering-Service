@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
-import javax.transaction.Transactional;
-
 @Component
 public class RestRoutes extends RouteBuilder {
 
@@ -21,7 +19,6 @@ public class RestRoutes extends RouteBuilder {
     private CamelContext camelContext;
 
     @Override
-    @Transactional(rollbackOn = Exception.class)
     public void configure() throws Exception {
         camelContext.addService(new org.apache.camel.impl.saga.InMemorySagaService());
         restConfiguration().component("servlet").bindingMode(RestBindingMode.json);
@@ -58,7 +55,6 @@ public class RestRoutes extends RouteBuilder {
 
         from("direct:add-order")
                 .id("add-order2")
-                .transacted()
                 .saga()
                 .multicast()
                 .to("direct:insert-new-order")
