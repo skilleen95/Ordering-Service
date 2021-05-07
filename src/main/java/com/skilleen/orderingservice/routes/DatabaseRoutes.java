@@ -27,8 +27,8 @@ public class DatabaseRoutes extends RouteBuilder {
                 .log("Database save successful")
                 .log("RIGHT HERE: ${body}")
                 .setHeader("test", simple("${body.orderId}"))
-                .log("${in.header.test}")
-                .log("${out.header.test}");
+                .log("IN ${in.header.test}")
+                .log("OUT ${out.header.test}");
                 //.option("OptionId", simple("${in.header.test}"));
 
         from("direct:removeOrder")
