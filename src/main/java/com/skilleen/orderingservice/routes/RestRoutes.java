@@ -58,6 +58,7 @@ public class RestRoutes extends RouteBuilder {
 
         from("direct:add-order")
                 .id("add-order2")
+                .transacted()
                 .saga()
                 .multicast()
                 .to("direct:insert-new-order")
