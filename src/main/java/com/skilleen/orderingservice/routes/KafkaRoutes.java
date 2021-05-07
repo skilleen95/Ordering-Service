@@ -9,11 +9,14 @@ import org.apache.camel.model.SagaPropagation;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+
 
 @Component
 public class KafkaRoutes extends RouteBuilder {
 
     @Override
+    @Transactional
     public void configure() {
         from("direct:publish")
                 .setBody(constant("Message from Scott"))

@@ -7,6 +7,8 @@ import org.apache.camel.model.SagaPropagation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
+
 
 @Component
 public class DatabaseRoutes extends RouteBuilder {
@@ -15,6 +17,7 @@ public class DatabaseRoutes extends RouteBuilder {
     private OrderAdapter orderAdapter;
 
     @Override
+    @Transactional
     public void configure() {
         from("direct:insert-new-order")
                 .id("database")
