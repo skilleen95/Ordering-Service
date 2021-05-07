@@ -25,6 +25,7 @@ public class DatabaseRoutes extends RouteBuilder {
                 .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")
                 .log("Database save successful")
+                .log("RIGHT HERE: ${body}")
                 .option("OptionId", simple("${body}"));
 
         from("direct:removeOrder")
