@@ -26,7 +26,8 @@ public class DatabaseRoutes extends RouteBuilder {
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")
                 .log("Database save successful")
                 .log("RIGHT HERE: ${body}")
-                .option("OptionId", simple("${body}"));
+                .setHeader("test", simple("${body.orderId}"))
+                .option("OptionId", simple("in.header.test"));
 
         from("direct:removeOrder")
                 .transform(header("OptionId")) // retrieve the CreditId option from headers
