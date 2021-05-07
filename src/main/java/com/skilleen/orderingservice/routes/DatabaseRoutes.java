@@ -19,6 +19,7 @@ public class DatabaseRoutes extends RouteBuilder {
         from("direct:insert-new-order")
                 .saga()
                 .propagation(SagaPropagation.SUPPORTS)
+                .transacted()
                 .bean(orderAdapter, "adaptToOrderEntity")
                 .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")
