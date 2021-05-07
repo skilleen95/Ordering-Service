@@ -25,20 +25,12 @@ public class DatabaseRoutes extends RouteBuilder {
                 .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")
                 .log("Database save successful")
-                .log("RIGHT HERE: ${body}")
-                .setHeader("test", simple("${body.orderId}"))
-                .log("IN ${in.header.test}")
-                .log("OUT ${out.header.test}")
-                .option("OptionId", simple("${in.header.test}"));
+                .option("OptionId", simple("${body}"));
 
         from("direct:removeOrder")
-                .log("NOW HERE: ${body}")
-                .log("AND THEN ${in.header.test}")
-                .transform(header("OptionId")) // retrieve the CreditId option from headers
-                .log("OHNOOOOO")
-                .log("NOW HERE: ${body}")
+                .log("Error occured, removing order entry to database")
                 .transform(header("OptionId"))
-                //.bean(creditService, "refundCredit")
-                .log("Credit for Custom Id ${body} refunded");
+                .to("jpa:" + OrderEntity.class.getName() + "?query=delete o from CustomerOrder o where o.customerId = ${body.customerId}&useExecuteUpdate=true")
+                .log("Order cleaned up From Database");
     }
 }
