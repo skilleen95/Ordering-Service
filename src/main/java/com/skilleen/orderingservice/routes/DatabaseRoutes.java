@@ -29,11 +29,14 @@ public class DatabaseRoutes extends RouteBuilder {
                 .setHeader("test", simple("${body.orderId}"))
                 .log("IN ${in.header.test}")
                 .log("OUT ${out.header.test}");
-                //.option("OptionId", simple("${in.header.test}"));
+                .option("OptionId", simple("${in.header.test}"));
 
         from("direct:removeOrder")
+                .log("NOW HERE: ${body}")
+                .log("AND THEN ${in.header.test}")
                 .transform(header("OptionId")) // retrieve the CreditId option from headers
                 .log("OHNOOOOO")
+                .log("NOW HERE: ${body}")
                 .transform(header("OptionId"))
                 //.bean(creditService, "refundCredit")
                 .log("Credit for Custom Id ${body} refunded");
