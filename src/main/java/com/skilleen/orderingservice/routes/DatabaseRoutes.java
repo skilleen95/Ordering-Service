@@ -30,7 +30,7 @@ public class DatabaseRoutes extends RouteBuilder {
         from("direct:removeOrder")
                 .log("Error occured, removing order entry to database")
                 .transform(header("OptionId"))
-                .to("jpa:" + OrderEntity.class.getName() + "?query=delete from CustomerOrder where customer_Id = 21 &useExecuteUpdate=true")
+                .to("jpa:" + OrderEntity.class.getName() + "?query=delete from CustomerOrder where customer_Id = 5 &useExecuteUpdate=true")
                 .log("Order cleaned up From Database");
     }
 }
