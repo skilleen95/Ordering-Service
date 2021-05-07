@@ -59,10 +59,10 @@ public class RestRoutes extends RouteBuilder {
         from("direct:add-order")
                 .id("add-order2")
                 .saga()
+                .onException(Exception.class).markRollbackOnlyLast()
                 .multicast()
                 .to("direct:insert-new-order")
-                .to("direct:create-shipping-request")
-                .onException(Exception.class).markRollbackOnlyLast();
+                .to("direct:create-shipping-request");
 
     }
 
