@@ -24,6 +24,7 @@ public class KafkaRoutes extends RouteBuilder {
                 .saga()
                 .propagation(SagaPropagation.SUPPORTS)
                 .id("order-route")
+                .log("HELLLO ${body} refunded")
                 .bean(this,"transformMessage")
                 .marshal().json(JsonLibrary.Jackson)
                 .log("Order confirmed! Sending to Shipping service..")
