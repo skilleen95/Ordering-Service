@@ -20,12 +20,12 @@ public class DatabaseRoutes extends RouteBuilder {
                 .id("database")
                 .saga()
                 .propagation(SagaPropagation.SUPPORTS)
-                .option("OptionId", body()) // mark the current body as needed in the compensating action
                 .compensation("direct:removeOrder")
                 .bean(orderAdapter, "adaptToOrderEntity")
                 .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")
                 .log("Database save successful")
+                .option("OptionId", body()) // mark the current body as needed in the compensating action
                 .end();
 
         from("direct:removeOrder")
