@@ -24,8 +24,8 @@ public class DatabaseRoutes extends RouteBuilder {
                 .bean(orderAdapter, "adaptToOrderEntity")
                 .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")
-                .log("Database save successful ${body}")
-                .option("OptionId", body());
+                .log("Database save successful")
+                .option("OptionId", "${body}");
 
         from("direct:removeOrder")
                 .transform(header("OptionId")) // retrieve the CreditId option from headers
