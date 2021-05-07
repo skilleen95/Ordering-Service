@@ -47,12 +47,14 @@ public class RestRoutes extends RouteBuilder {
 
     private void addNewOrderRoute() {
         rest().post("add-order")
+                .id("add-order1")
                 .type(Order.class)
                 .consumes(MediaType.APPLICATION_JSON_VALUE)
                 .produces(MediaType.APPLICATION_JSON_VALUE)
                 .to("direct:add-order");
 
         from("direct:add-order")
+                .id("add-order2")
                 .saga()
                 .multicast()
                 .to("direct:insert-new-order")

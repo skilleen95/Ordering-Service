@@ -17,11 +17,13 @@ public class DatabaseRoutes extends RouteBuilder {
     @Override
     public void configure() {
         from("direct:insert-new-order")
+                .id("database")
                 .saga()
                 .propagation(SagaPropagation.SUPPORTS)
                 .bean(orderAdapter, "adaptToOrderEntity")
                 .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")
-                .log("Database save successful");
+                .log("Database save successful")
+                .end();
     }
 }

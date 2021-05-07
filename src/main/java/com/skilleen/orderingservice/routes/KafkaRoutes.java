@@ -31,7 +31,8 @@ public class KafkaRoutes extends RouteBuilder {
                 .onException(Exception.class).markRollbackOnlyLast().end()
                 .id("order-publish")
                 .unmarshal().json(JsonLibrary.Jackson)
-                .log("DONE");
+                .log("DONE")
+                .end();
 
     }
 
