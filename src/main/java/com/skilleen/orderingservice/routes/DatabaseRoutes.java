@@ -27,7 +27,7 @@ public class DatabaseRoutes extends RouteBuilder {
                 .log("Database save successful")
                 .log("RIGHT HERE: ${body}")
                 .setHeader("test", simple("${body.orderId}"))
-                .option("OptionId", simple("in.header.test"));
+                .option("OptionId", simple("${in.header.test}"));
 
         from("direct:removeOrder")
                 .transform(header("OptionId")) // retrieve the CreditId option from headers
