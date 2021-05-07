@@ -38,6 +38,8 @@ public class KafkaRoutes extends RouteBuilder {
     public void transformMessage(Exchange exchange){
         Message in = exchange.getIn();
         Order order = in.getBody(Order.class);
+        String s = null;
+        s.contains("hehe");
         log.info("Received Order: " + order);
         ShippingOrder shippingOrder = new ShippingOrder(order.getName(), order.getPrice());
         in.setBody(shippingOrder);
