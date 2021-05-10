@@ -21,16 +21,19 @@ public class DatabaseRoutes extends RouteBuilder {
                 .saga()
                 .propagation(SagaPropagation.SUPPORTS)
                 .compensation("direct:removeOrder")
+                .option("OptionId", simple("${body}"))
                 .bean(orderAdapter, "adaptToOrderEntity")
                 .log("Saving Order to Database: ")
                 .to("jpa:" + OrderEntity.class.getName() + "?useExecuteUpdate=true")
-                .log("Database save successful")
-                .option("OptionId", simple("${body}"));
+                .log("Database save successful");
+
 
         from("direct:removeOrder")
                 .log("Error occured, removing order entry to database")
                 .transform(header("OptionId"))
-                .to("jpa:" + OrderEntity.class.getName() + "?query=delete from CustomerOrder where customer_Id = 5 &useExecuteUpdate=true")
+                .to("jpa:" + OrderEntity.class.getName() + "?query=delete from CustomerOrder order by order_id desc limit 1" +
+                        " &useExecuteUpdate=true")
                 .log("Order cleaned up From Database");
     }
 }
+
