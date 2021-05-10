@@ -1,0 +1,53 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ordering-service
+  labels:
+    app: ordering-service
+    app.kubernetes.io/component: ordering-service
+    app.kubernetes.io/instance: fuse-applications-dev
+    app.kubernetes.io/part-of: Microservices
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: ordering-service
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        deployment: ordering-service
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+    spec:
+      containers:
+        - name: ordering-service
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/fuse-applications-dev/ordering-service@sha256:dd23ff6207de1efe29429ec340875741dd08c9cedb4482a5815fb9bb223690f0
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - name: jolokia
+              containerPort: 8778
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: ordering-service-variables
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
